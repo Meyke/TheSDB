@@ -57,7 +57,7 @@ class RemoteConnectionImpl extends UnicastRemoteObject implements RemoteConnecti
 	void commit() {
 		tx.commit();
 		System.out.println(stampaStatistiche());
-		SimpleDB.fileMgr().resetBlockStats();
+		SimpleDB.fileMgr().resetBlockStats(); //perchè voglio azzerare le statistiche a ogni interrogazione
 		tx = new Transaction();
 	}
 
