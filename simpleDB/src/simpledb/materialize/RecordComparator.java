@@ -1,6 +1,8 @@
 package simpledb.materialize;
 
 import simpledb.query.*;
+import simpledb.record.RID;
+
 import java.util.*;
 
 /**
@@ -41,4 +43,36 @@ public class RecordComparator implements Comparator<Scan> {
       }
       return 0;
    }
+   
+   /**
+	 * Compares two records at two specified RIDS of a scan.
+	 * The sort fields are considered in turn.
+	 * When a field is encountered for which the records have
+	 * different values, those values are used as the result
+	 * of the comparison.
+	 * If the two records have the same values for all
+	 * sort fields, then the method returns 0.
+	 * @param s the scan
+	 * @param r1 the first RID
+	 * @param r2 the second RID
+	 * @return the result of comparing the two records according to the field list
+	 */
+	public int compare(UpdateScan s, RID r1, RID r2) {
+		RID currentRid = s.getRid();
+		for (String fldname : fields) {
+			s.moveToRid(r1);
+			Constant val1 = s.getVal(fldname);
+			s.moveToRid(r2);
+			Constant val2 = s.getVal(fldname);
+			int result = val1.compareTo(val2);
+			if (result != 0) {
+				s.moveToRid(currentRid);
+				return result;
+			}
+		}
+		s.moveToRid(currentRid);
+		return 0;
+	}
+	
+	
 }

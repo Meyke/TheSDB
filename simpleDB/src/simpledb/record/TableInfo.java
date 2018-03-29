@@ -33,7 +33,7 @@ public class TableInfo {
       }
       recordlen = pos;
    }
-   
+   					
    /**
     * Creates a TableInfo object from the 
     * specified metadata.

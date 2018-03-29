@@ -18,7 +18,10 @@ public class SortScan implements Scan {
    private boolean hasmore1, hasmore2=false;
    private List<RID> savedposition;
    
-   /**
+   
+   public SortScan() {}
+
+/**
     * Creates a sort scan, given a list of 1 or 2 runs.
     * If there is only 1 run, then s2 will be null and
     * hasmore2 will be false.
@@ -147,4 +150,66 @@ public class SortScan implements Scan {
       if (rid2 != null)
          s2.moveToRid(rid2);
    }
+
+public UpdateScan getS1() {
+	return s1;
 }
+
+public void setS1(UpdateScan s1) {
+	this.s1 = s1;
+}
+
+public UpdateScan getS2() {
+	return s2;
+}
+
+public void setS2(UpdateScan s2) {
+	this.s2 = s2;
+}
+
+public UpdateScan getCurrentscan() {
+	return currentscan;
+}
+
+public void setCurrentscan(UpdateScan currentscan) {
+	this.currentscan = currentscan;
+}
+
+public RecordComparator getComp() {
+	return comp;
+}
+
+public void setComp(RecordComparator comp) {
+	this.comp = comp;
+}
+
+public boolean isHasmore1() {
+	return hasmore1;
+}
+
+public void setHasmore1(boolean hasmore1) {
+	this.hasmore1 = hasmore1;
+}
+
+public boolean isHasmore2() {
+	return hasmore2;
+}
+
+public void setHasmore2(boolean hasmore2) {
+	this.hasmore2 = hasmore2;
+}
+
+public List<RID> getSavedposition() {
+	return savedposition;
+}
+
+public void setSavedposition(List<RID> savedposition) {
+	this.savedposition = savedposition;
+}
+   
+   
+   
+   
+}
+
+

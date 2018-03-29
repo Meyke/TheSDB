@@ -9,12 +9,16 @@ import simpledb.tx.Transaction;
  * @author Edward Sciore
  */
 public class RecordPage {
+	
+   // ricordo che ogni slot è formato da FLAG + RECORD EFFETTIVO
    public static final int EMPTY = 0, INUSE = 1;
    
    private Block blk;
    private TableInfo ti;
    private Transaction tx;
    private int slotsize;
+   
+   //utile per indicare su quale record della pagina sto lavorando
    private int currentslot = -1;
    
    /** Creates the record manager for the specified block.
@@ -149,11 +153,13 @@ public class RecordPage {
       return currentpos() + slotsize <= BLOCK_SIZE;
    }
    
+   //per cercare un record con un certo flag, accedo a un certo offset del blocco
+   //tramite i metodi offerti da Transaction tx
    private boolean searchFor(int flag) {
       currentslot++;
       while (isValidSlot()) {
          int position = currentpos();
-         if (tx.getInt(blk, position) == flag)
+         if (tx.getInt(blk, position) == flag) 
             return true;
          currentslot++;
       }

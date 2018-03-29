@@ -31,9 +31,9 @@ class BasicBufferMgr {
 		numAvailable = numbuffs;
 		for (int i=0; i<numbuffs; i++)
 			bufferpool[i] = new Buffer();
-		this.unpinnedStrategy = new ClockUnpinStrategy(bufferpool);
 		
-		//scommentare queste due parti di codice per cambiare le politiche
+		//scommentare una delle tre parti di codice per cambiare le politiche
+		this.unpinnedStrategy = new ClockUnpinStrategy(bufferpool);
 		//this.unpinnedStrategy = new NaiveUnpinStrategy(bufferpool);
 		//this.unpinnedStrategy = new LRUUnpinStrategy(bufferpool);
 		
