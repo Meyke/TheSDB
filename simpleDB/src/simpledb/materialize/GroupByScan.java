@@ -128,5 +128,11 @@ public class GroupByScan implements Scan {
          return true;
       return false;
    }
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }
 

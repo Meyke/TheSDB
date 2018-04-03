@@ -26,10 +26,12 @@ public class NWaysSortScan extends SortScan{
 	 */
 	public NWaysSortScan(List<TempTable> runs, RecordComparator comp) {
 		super();
+		System.out.println("ultimo passo del merge ha " + runs.size() + " runs");
 		this.comp = comp;
 		this.scans = new ArrayList<>(); 
 		for (TempTable temptable :runs) {
 			UpdateScan s = (UpdateScan) temptable.open();
+			s.next();
 			this.scans.add(s); 
 		}
 	}
@@ -46,6 +48,8 @@ public class NWaysSortScan extends SortScan{
 		currentscan = null;
 		for (UpdateScan s : this.scans)
 			s.beforeFirst();
+		for (UpdateScan s : this.scans)
+			s.next();
 	}
 
 	/**
@@ -56,16 +60,14 @@ public class NWaysSortScan extends SortScan{
 	 * @see simpledb.query.Scan#next()
 	 */
 	public boolean next() {
-		removeScanTerminated();
 		if (currentscan != null) {
 			for (UpdateScan s : this.scans)
 				if (currentscan == s)
 					s.next();
 		}
-
+		removeScanTerminated();
 		if (this.scans.isEmpty())
 			return false;
-
 		else {
 			Collections.sort(this.scans, this.comp);
 			currentscan = this.scans.get(0);
@@ -78,10 +80,10 @@ public class NWaysSortScan extends SortScan{
 		Iterator<UpdateScan> it = this.scans.iterator();
 		while (it.hasNext()) {
 			Scan elemento = it.next();
-			boolean hasmore = elemento.next();
+			boolean hasmore = elemento.isHasMore();
 			if (!hasmore) {
-				elemento.close();
 				it.remove();
+				elemento.close();
 			}
 		}
 

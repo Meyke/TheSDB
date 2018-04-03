@@ -20,6 +20,7 @@ public class BufferNeeds {
     */
    public static int bestRoot(int size) {
       int avail = SimpleDB.bufferMgr().available();
+      System.out.println("numero buffer disponibili " + avail );
       if (avail <= 1)
          return 1;
       int k = Integer.MAX_VALUE;

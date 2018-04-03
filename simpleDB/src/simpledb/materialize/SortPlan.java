@@ -43,11 +43,14 @@ public class SortPlan implements Plan {
 		//divido la mia scan (per esempio TableScan) in vari runs.
 		//la splitIntoRuns divide la scan in runs ORDINATI
 		List<TempTable> runs = splitIntoRuns(src); 
+		System.out.println("E' STATO DIVISO IN " + runs.size() + "runs");
 		src.close();
 
 		//fino a che ho più di due runs, effettua la fusione. 
-		while (runs.size() > 2) 
+		while (runs.size() > 2) {
 			runs = doAMergeIteration(runs);
+			System.out.println("eseguo un merge");
+		}
 		// Le ultime 2 run, cioè l'ultima passata del merge viene effettuata da SortScan
 		return new SortScan(runs, comp); 
 	}

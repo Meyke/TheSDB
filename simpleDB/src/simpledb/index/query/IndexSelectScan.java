@@ -95,4 +95,10 @@ public class IndexSelectScan implements Scan {
    public boolean hasField(String fldname) {
       return ts.hasField(fldname);
    }
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

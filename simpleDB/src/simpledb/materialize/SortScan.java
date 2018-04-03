@@ -29,6 +29,7 @@ public class SortScan implements Scan {
     * @param comp the record comparator
     */
    public SortScan(List<TempTable> runs, RecordComparator comp) {
+	   System.out.println("ultimo passo del merge ha " + runs.size() + " runs");
       this.comp = comp;
       s1 = (UpdateScan) runs.get(0).open();
       hasmore1 = s1.next();
@@ -78,8 +79,10 @@ public class SortScan implements Scan {
          else
             currentscan = s2;
       }
-      else if (hasmore1)
+      else if (hasmore1) {
+    	  System.out.println("guardo scan1");
          currentscan = s1;
+      }
       else if (hasmore2)
          currentscan = s2;
       return true;
@@ -205,6 +208,12 @@ public List<RID> getSavedposition() {
 
 public void setSavedposition(List<RID> savedposition) {
 	this.savedposition = savedposition;
+}
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
 }
    
    

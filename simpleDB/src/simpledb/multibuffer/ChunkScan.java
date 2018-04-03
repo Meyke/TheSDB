@@ -108,4 +108,11 @@ public class ChunkScan implements Scan {
       rp = pages.get(current - startbnum);
       rp.moveToId(-1);
    }
+
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

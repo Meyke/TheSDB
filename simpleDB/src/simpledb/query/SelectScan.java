@@ -100,4 +100,10 @@ public class SelectScan implements UpdateScan {
       UpdateScan us = (UpdateScan) s;
       us.moveToRid(rid);
    }
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

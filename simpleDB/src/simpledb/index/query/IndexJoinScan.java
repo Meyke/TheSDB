@@ -119,4 +119,10 @@ public class IndexJoinScan implements Scan {
       Constant searchkey = s.getVal(joinfield);
       idx.beforeFirst(searchkey);
    }
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

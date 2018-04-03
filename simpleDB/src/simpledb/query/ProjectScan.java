@@ -65,4 +65,10 @@ public class ProjectScan implements Scan {
    public boolean hasField(String fldname) {
       return fieldlist.contains(fldname);
    }
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

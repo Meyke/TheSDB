@@ -118,5 +118,11 @@ public class MultiBufferProductScan implements Scan {
       nextblknum = end + 1;
       return true;
    }
+
+@Override
+public boolean isHasMore() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }
 
